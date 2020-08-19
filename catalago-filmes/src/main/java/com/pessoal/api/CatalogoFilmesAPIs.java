@@ -3,7 +3,6 @@ package com.pessoal.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,17 +21,17 @@ public class CatalogoFilmesAPIs {
 
 	@PostMapping("/filme")
 	public ResponseEntity<Filme> salvarFilme(@RequestBody Filme filme){
-		return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(filmeService.salvarFilme(filme));
+		return ResponseEntity.ok(filmeService.salvarFilme(filme));
 	}
 	
 	@GetMapping("/filme")
 	public ResponseEntity<List<Filme>> listarFilmes(){
-		return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(filmeService.listarFilme());
+		return ResponseEntity.ok(filmeService.listarFilme());
 	}
 	
 	@GetMapping("/filme/{titulo}")
 	public ResponseEntity<Filme> buscarFilmePorTitulo(@PathVariable String titulo){
-		return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(filmeService.buscarPorTitulo(titulo));
+		return ResponseEntity.ok(filmeService.buscarPorTitulo(titulo));
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.pessoal.service;
 
-import java.util.Optional;
-
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +18,13 @@ public class ElencoService {
 	}
 	
 	public Elenco buscarElencoPorNome(String nome) {
-		Optional<Elenco> elenco = repository.findByNome(nome);
-		if(elenco.isPresent()) {
-			return elenco.get();
-		}else{
-			return null;
-		}
+		return repository.findByNome(nome).orElse(null);
 	}
 	
 	public Elenco atualizarElenco(Elenco elenco) {
 		
 		Elenco elencoBase = buscarElencoPorNome(elenco.getNome());
-		if(elencoBase != null) {
+		if(ObjectUtils.isEmpty(elencoBase)) {
 			elencoBase.setDataNascimento(elenco.getDataNascimento());
 			elencoBase.setFilmografia(elenco.getFilmografia());
 			elencoBase.setNome(elenco.getNome());
@@ -42,12 +36,7 @@ public class ElencoService {
 	}
 	
 	public Elenco buscarElencoPorID(String id) {
-		Optional<Elenco> elenco = repository.findById(id);
-		if(elenco.isPresent()) {
-			return elenco.get();
-		}else{
-			return null;			
-		}
+		return repository.findById(id).orElse(null);
 	}
 	
 }
