@@ -1,0 +1,6 @@
+spring:  application:    name: catalogo-filmes
+  data:    mongodb:      uri: mongodb://localhost:27017/pessoal
+      
+server:  port: 8080
+  
+eureka:  client:    service-url:      defaultzone: http://localhost:8761/eureka/

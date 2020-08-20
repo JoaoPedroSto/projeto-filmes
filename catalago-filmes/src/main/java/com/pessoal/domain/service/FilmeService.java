@@ -1,4 +1,4 @@
-package com.pessoal.service;
+package com.pessoal.domain.service;
 
 import java.util.List;
 
@@ -6,10 +6,12 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pessoal.feign.ElencoDirecaoFeign;
-import com.pessoal.model.Elenco;
-import com.pessoal.model.Filme;
-import com.pessoal.repository.FilmeRepository;
+import com.pessoal.domain.dto.FilmeDTO;
+import com.pessoal.domain.entity.Elenco;
+import com.pessoal.domain.entity.Filme;
+import com.pessoal.domain.utils.DtoEntityConverter;
+import com.pessoal.infra.feign.ElencoDirecaoFeign;
+import com.pessoal.infra.repository.FilmeRepository;
 
 @Service
 public class FilmeService {
@@ -19,15 +21,18 @@ public class FilmeService {
 
 	@Autowired
 	private ElencoDirecaoFeign elencoDirecaoFeign;
+	
+	@Autowired
+	private DtoEntityConverter convert;
 
 	public List<Filme> listarFilme() {
 		return repository.findAll();
 	}
 
-	public Filme buscarPorTitulo(String titulo) {
+	public FilmeDTO buscarPorTitulo(String titulo) {
 		Filme filme = repository.findByTitulo(titulo);
 		atualizarReferenciaElenco(filme);
-		return repository.save(filme);
+		return convert.convertEntityToDto(repository.save(filme));
 	}
 
 	public Filme salvarFilme(Filme filme) {

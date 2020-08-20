@@ -1,8 +1,4 @@
-package com.pessoal.model;
-
-import java.util.List;
-
-import org.springframework.data.annotation.Id;
+package com.pessoal.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,16 +10,11 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Filme {
 
-	@Id
-	private String id;
 	private String titulo;
-	private String sinopse;
-	private String diretor;
-	private List<Elenco> elenco;
 	private String genero;
 	
 }

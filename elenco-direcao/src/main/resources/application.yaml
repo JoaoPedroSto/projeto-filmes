@@ -1,0 +1,6 @@
+server:  port: 8081
+  
+spring:  application:    name: elenco-direcao
+  data:    mongodb:      uri: mongodb://localhost:27017/pessoal
+      
+eureka:  client:    service-url:      defaultzone: http://localhost:8761/eureka/

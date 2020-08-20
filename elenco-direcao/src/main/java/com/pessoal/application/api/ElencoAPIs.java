@@ -1,4 +1,4 @@
-package com.pessoal.api;
+package com.pessoal.application.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pessoal.model.Elenco;
-import com.pessoal.service.ElencoService;
+import com.pessoal.domain.entity.Elenco;
+import com.pessoal.domain.service.ElencoService;
 
 @RestController()
 @RequestMapping("/elenco")

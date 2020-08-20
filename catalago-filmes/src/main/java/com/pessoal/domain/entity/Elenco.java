@@ -1,11 +1,11 @@
-package com.pessoal.model;
+package com.pessoal.domain.entity;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
-import com.pessoal.utils.Ocupacao;
+import com.pessoal.domain.utils.Ocupacao;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

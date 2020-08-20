@@ -1,11 +1,11 @@
-package com.pessoal.service;
+package com.pessoal.domain.service;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pessoal.model.Elenco;
-import com.pessoal.repository.ElencoRepository;
+import com.pessoal.domain.entity.Elenco;
+import com.pessoal.infra.repository.ElencoRepository;
 
 @Service
 public class ElencoService {

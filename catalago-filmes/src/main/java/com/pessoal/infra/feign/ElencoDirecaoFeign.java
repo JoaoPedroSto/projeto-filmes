@@ -1,4 +1,4 @@
-package com.pessoal.feign;
+package com.pessoal.infra.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.pessoal.model.Elenco;
+import com.pessoal.domain.entity.Elenco;
 
 @Component
 @FeignClient(name = "salvarElenco", url = "localhost:8081")
@@ -20,3 +20,4 @@ public interface ElencoDirecaoFeign {
 	Elenco buscarElencoPorId(@PathVariable String id);
 	
 }
+	

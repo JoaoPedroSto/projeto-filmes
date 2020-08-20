@@ -1,4 +1,4 @@
-package com.pessoal.api;
+package com.pessoal.application.api;
 
 import java.util.List;
 
@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pessoal.model.Filme;
-import com.pessoal.service.FilmeService;
+import com.pessoal.domain.dto.FilmeDTO;
+import com.pessoal.domain.entity.Filme;
+import com.pessoal.domain.service.FilmeService;
 
 @RestController()
 public class CatalogoFilmesAPIs {
@@ -30,7 +31,7 @@ public class CatalogoFilmesAPIs {
 	}
 	
 	@GetMapping("/filme/{titulo}")
-	public ResponseEntity<Filme> buscarFilmePorTitulo(@PathVariable String titulo){
+	public ResponseEntity<FilmeDTO> buscarFilmePorTitulo(@PathVariable String titulo){
 		return ResponseEntity.ok(filmeService.buscarPorTitulo(titulo));
 	}
 	
