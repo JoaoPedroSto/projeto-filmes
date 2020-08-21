@@ -35,10 +35,10 @@ public class FilmeService {
 		return convert.convertEntityToDto(repository.save(filme));
 	}
 
-	public Filme salvarFilme(Filme filme) {
+	public FilmeDTO salvarFilme(FilmeDTO filmeDTO) {
+		Filme filme = convert.convertDtoToEntity(filmeDTO);
 		filme.getElenco().forEach(elenco -> elencoDirecaoFeign.salvarElenco(elenco).getId());
-
-		return repository.save(filme);
+		return convert.convertEntityToDto(repository.save(filme));
 	}
 
 	private void atualizarReferenciaElenco(Filme filme) {

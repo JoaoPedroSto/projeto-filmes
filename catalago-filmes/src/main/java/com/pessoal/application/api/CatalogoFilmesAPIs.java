@@ -21,7 +21,7 @@ public class CatalogoFilmesAPIs {
 	private FilmeService filmeService;
 
 	@PostMapping("/filme")
-	public ResponseEntity<Filme> salvarFilme(@RequestBody Filme filme){
+	public ResponseEntity<FilmeDTO> salvarFilme(@RequestBody FilmeDTO filme){
 		return ResponseEntity.ok(filmeService.salvarFilme(filme));
 	}
 	

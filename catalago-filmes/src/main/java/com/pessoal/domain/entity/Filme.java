@@ -1,5 +1,6 @@
 package com.pessoal.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -20,10 +21,16 @@ public class Filme {
 
 	@Id
 	private String id;
+	
 	private String titulo;
+	
 	private String sinopse;
+	
 	private String diretor;
-	private List<Elenco> elenco;
+	
+	@Builder.Default
+	private List<Elenco> elenco = new ArrayList<>();
+	
 	private String genero;
 	
 }

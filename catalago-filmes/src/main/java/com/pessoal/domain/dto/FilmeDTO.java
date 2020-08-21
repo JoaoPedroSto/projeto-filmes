@@ -1,5 +1,6 @@
 package com.pessoal.domain.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -15,9 +16,16 @@ import lombok.ToString;
 @AllArgsConstructor
 public class FilmeDTO {
 
+	private String id;
+	
 	private String titulo;
+	
 	private String sinopse;
+	
 	private String diretor;
-	private List<ElencoDTO> elenco;
+	
+	@Builder.Default
+	private List<ElencoDTO> elenco = new ArrayList<>();
+	
 	private String genero;
 }
