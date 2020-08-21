@@ -3,6 +3,8 @@ package com.pessoal.domain.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class FilmeDTO {
 
+	@JsonIgnore
 	private String id;
 	
 	private String titulo;

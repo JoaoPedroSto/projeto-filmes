@@ -21,7 +21,7 @@ public class ElencoDTO {
 
 	private String nome;
 	private LocalDate dataNascimento;
-	private List<FilmeDTO> filmografia;
+	private List<String> filmografia;
 	private Ocupacao ocupacao;
 	
 }

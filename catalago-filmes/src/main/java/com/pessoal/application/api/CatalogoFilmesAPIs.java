@@ -21,18 +21,17 @@ public class CatalogoFilmesAPIs {
 	private FilmeService filmeService;
 
 	@PostMapping("/filme")
-	public ResponseEntity<FilmeDTO> salvarFilme(@RequestBody FilmeDTO filme){
+	public ResponseEntity<FilmeDTO> salvarFilme(@RequestBody FilmeDTO filme) {
 		return ResponseEntity.ok(filmeService.salvarFilme(filme));
 	}
-	
-	@GetMapping("/filme")
-	public ResponseEntity<List<Filme>> listarFilmes(){
-		return ResponseEntity.ok(filmeService.listarFilme());
-	}
-	
+
 	@GetMapping("/filme/{titulo}")
-	public ResponseEntity<FilmeDTO> buscarFilmePorTitulo(@PathVariable String titulo){
+	public ResponseEntity<FilmeDTO> buscarFilmePorTitulo(@PathVariable String titulo) {
 		return ResponseEntity.ok(filmeService.buscarPorTitulo(titulo));
 	}
-	
+
+	@GetMapping("/filme")
+	public ResponseEntity<List<Filme>> listarFilmes() {
+		return ResponseEntity.ok(filmeService.listarFilme());
+	}
 }

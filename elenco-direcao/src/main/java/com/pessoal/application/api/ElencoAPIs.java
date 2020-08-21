@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pessoal.domain.entity.Elenco;
+import com.pessoal.domain.dto.ElencoDTO;
 import com.pessoal.domain.service.ElencoService;
 
 @RestController()
@@ -21,22 +21,22 @@ public class ElencoAPIs {
 	private ElencoService elencoService;
 	
 	@PostMapping()
-	public ResponseEntity<Elenco> salvarElenco(@RequestBody Elenco elenco){
+	public ResponseEntity<ElencoDTO> salvarElenco(@RequestBody ElencoDTO elenco){
 		return ResponseEntity.ok(elencoService.salvarElenco(elenco));
 	}
 	
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<Elenco> buscarElencoPorNome(@PathVariable String nome){
+	public ResponseEntity<ElencoDTO> buscarElencoPorNome(@PathVariable String nome){
 		return ResponseEntity.ok(elencoService.buscarElencoPorNome(nome));
 	}
 	
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Elenco> buscarElencoPorID(@PathVariable String id){
+	public ResponseEntity<ElencoDTO> buscarElencoPorID(@PathVariable String id){
 		return ResponseEntity.ok(elencoService.buscarElencoPorID(id));
 	}
 	
 	@PutMapping()
-	public ResponseEntity<Elenco> atualizarElenco(@RequestBody Elenco elenco){
+	public ResponseEntity<ElencoDTO> atualizarElenco(@RequestBody ElencoDTO elenco){
 		return ResponseEntity.ok(elencoService.atualizarElenco(elenco));
 	}
 }

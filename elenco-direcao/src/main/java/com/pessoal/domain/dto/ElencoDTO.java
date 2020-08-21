@@ -1,12 +1,12 @@
-package com.pessoal.domain.entity;
+package com.pessoal.domain.dto;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.data.annotation.Id;
 
-import com.pessoal.domain.dto.ElencoDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pessoal.domain.entity.Elenco;
 import com.pessoal.domain.utils.Ocupacao;
 
 import lombok.AllArgsConstructor;
@@ -20,22 +20,22 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Elenco {
+public class ElencoDTO {
 
-	@Id
+	@JsonIgnore
 	private String id;
 	private String nome;
 	private LocalDate dataNascimento;
 	private List<String> filmografia;
 	private Ocupacao ocupacao;
-	
-	public Elenco(ElencoDTO elencoDTO) {
-		if(ObjectUtils.isNotEmpty(elencoDTO)) {
-			this.id = elencoDTO.getId();
-			this.nome = elencoDTO.getNome();
-			this.dataNascimento = elencoDTO.getDataNascimento();
-			this.filmografia = elencoDTO.getFilmografia();
-			this.ocupacao = elencoDTO.getOcupacao();			
+
+	public ElencoDTO(Elenco elenco) {
+		if (ObjectUtils.isNotEmpty(elenco)) {
+			this.id = elenco.getId();
+			this.nome = elenco.getNome();
+			this.dataNascimento = elenco.getDataNascimento();
+			this.filmografia = elenco.getFilmografia();
+			this.ocupacao = elenco.getOcupacao();
 		}
 	}
 
