@@ -1,7 +1,7 @@
 package com.pessoal.domain.service;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.BeanUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +15,20 @@ public class ElencoService {
 	@Autowired
 	private ElencoRepository repository;
 
+	@Autowired
+	private ModelMapper modelMapper;
+
 	public ElencoDTO salvarElenco(ElencoDTO elencoDTO) {
-		Elenco elenco = new Elenco(elencoDTO);
-		BeanUtils.copyProperties(repository.save(elenco), elencoDTO);
+		repository.save(convertToEntity(elencoDTO));
 		return elencoDTO;
 	}
 
 	public ElencoDTO buscarElencoPorNome(String nome) {
-		return new ElencoDTO(repository.findByNome(nome).orElse(null));
+		Elenco elenco = repository.findByNome(nome).orElse(null);
+		if (ObjectUtils.isNotEmpty(elenco)) {
+			return convertToDTO(elenco);
+		}
+		return null;
 	}
 
 	public ElencoDTO atualizarElenco(ElencoDTO elenco) {
@@ -32,14 +38,25 @@ public class ElencoService {
 			elencoBase.setFilmografia(elenco.getFilmografia());
 			elencoBase.setNome(elenco.getNome());
 			elencoBase.setOcupacao(elenco.getOcupacao());
-			return new ElencoDTO(repository.save(elencoBase));
-		} else {
+			return convertToDTO(repository.save(elencoBase));
+		} else
 			return null;
-		}
 	}
 
 	public ElencoDTO buscarElencoPorID(String id) {
-		return new ElencoDTO(repository.findById(id).orElse(null));
+		Elenco elenco = repository.findById(id).orElse(null);
+		if (ObjectUtils.isNotEmpty(elenco)) {
+			return convertToDTO(repository.findById(id).orElse(null));
+		} else
+			return null;
+	}
+
+	private ElencoDTO convertToDTO(Elenco elenco) {
+		return modelMapper.map(elenco, ElencoDTO.class);
+	}
+
+	private Elenco convertToEntity(ElencoDTO elencoDTO) {
+		return modelMapper.map(elencoDTO, Elenco.class);
 	}
 
 }

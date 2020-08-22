@@ -20,15 +20,16 @@ public class FilmeDTO {
 
 	@JsonIgnore
 	private String id;
-	
+
 	private String titulo;
-	
+
 	private String sinopse;
-	
+
 	private String diretor;
-	
+
 	@Builder.Default
 	private List<ElencoDTO> elenco = new ArrayList<>();
-	
+
 	private String genero;
+
 }

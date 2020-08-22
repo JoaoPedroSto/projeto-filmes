@@ -1,15 +1,13 @@
 package com.pessoal.domain.service;
 
-import java.util.List;
-
 import org.apache.commons.lang3.ObjectUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pessoal.domain.dto.FilmeDTO;
 import com.pessoal.domain.entity.Elenco;
 import com.pessoal.domain.entity.Filme;
-import com.pessoal.domain.utils.DtoEntityConverter;
 import com.pessoal.infra.feign.ElencoDirecaoFeign;
 import com.pessoal.infra.repository.FilmeRepository;
 
@@ -21,24 +19,23 @@ public class FilmeService {
 
 	@Autowired
 	private ElencoDirecaoFeign elencoDirecaoFeign;
-	
-	@Autowired
-	private DtoEntityConverter convert;
 
-	public List<Filme> listarFilme() {
-		return repository.findAll();
-	}
+	@Autowired
+	private ModelMapper modelMapper;
 
 	public FilmeDTO buscarPorTitulo(String titulo) {
 		Filme filme = repository.findByTitulo(titulo);
-		atualizarReferenciaElenco(filme);
-		return convert.convertEntityToDto(repository.save(filme));
+		if (ObjectUtils.isNotEmpty(filme)) {
+			atualizarReferenciaElenco(filme);
+			return convertToDTO(repository.save(filme));
+		} else
+			return null;
 	}
 
 	public FilmeDTO salvarFilme(FilmeDTO filmeDTO) {
-		Filme filme = convert.convertDtoToEntity(filmeDTO);
+		Filme filme = convertToEntity(filmeDTO);
 		filme.getElenco().forEach(elenco -> elencoDirecaoFeign.salvarElenco(elenco).getId());
-		return convert.convertEntityToDto(repository.save(filme));
+		return convertToDTO(repository.save(filme));
 	}
 
 	private void atualizarReferenciaElenco(Filme filme) {
@@ -51,6 +48,14 @@ public class FilmeService {
 				elenco.setOcupacao(elencoBase.getOcupacao());
 			});
 		}
+	}
+
+	private FilmeDTO convertToDTO(Filme filme) {
+		return modelMapper.map(filme, FilmeDTO.class);
+	}
+
+	private Filme convertToEntity(FilmeDTO filmeDTO) {
+		return modelMapper.map(filmeDTO, Filme.class);
 	}
 
 }

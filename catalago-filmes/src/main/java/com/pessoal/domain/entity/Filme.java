@@ -11,7 +11,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Data
 @Builder
 @ToString
@@ -21,16 +20,16 @@ public class Filme {
 
 	@Id
 	private String id;
-	
+
 	private String titulo;
-	
+
 	private String sinopse;
-	
+
 	private String diretor;
-	
+
 	@Builder.Default
 	private List<Elenco> elenco = new ArrayList<>();
-	
+
 	private String genero;
-	
+
 }
